@@ -1,0 +1,23 @@
+body, html{
+    background-color: rgb(209, 187, 158);
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    background-color: grey;
+    height: 10vh;
+    margin: 0;
+    padding: 0;
+}
+
+.top_boks{
+
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: darkgrey;
+    height: 100px;
+}
