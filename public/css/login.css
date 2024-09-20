@@ -1,0 +1,15 @@
+.login{
+    display: flex;
+    flex-direction: column;
+}
+
+.MainLContainer{
+    display: grid;
+    display: flex;
+    grid-template-columns: 1fr;
+    min-height: 400px;
+    background-color: salmon;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
