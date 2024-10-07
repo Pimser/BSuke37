@@ -1,0 +1,16 @@
+body{
+    background-color: salmon;
+}
+
+.hovedboks{
+    display: grid;
+    grid-template-columns: 20% 1fr;
+}
+
+.sidemeny{
+    background-color: rgb(209, 187, 158);
+}
+
+.hoved{
+    background-color: grey;
+}
