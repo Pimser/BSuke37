@@ -1,43 +1,39 @@
 const express = require("express");
 const { default: mongoose, Schema, mongo } = require("mongoose");
 const app = express();
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const multer = require("multer");
 const path = require("path");
 const { error } = require("console");
 
-// const uploads = multer({dest:"uploads/"})
 const diskStorage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, "./uploads")
+    destination: function (req, file, cb) {
+        cb(null, "./public/uploads")
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         console.log(file);
-        const ext = path.extname(file.originalname)
+        const ext = path.extname(file.originalname);
         console.log("EXT", ext);
-
-
-        //if(ext !== ".png") {
-        //    return cb(new Error("Only PNG FILES allowed!"))
-        //}
-
-        const filename = path.originalname + ".png"
-
-        cb(null, filename)
+        // if(ext !== ".png" || ext !== ".jpg") {
+        //     return cb(new Error("Only PNG FILES allowed, stay away Martin!"))
+        // } 
+        const fileName = file.originalname;
+        cb(null, fileName)
     }
+
 })
 
-const brukerSchema = new Schema({
-    tittel: String,
-    tag: String,
-    tittel: Array,
-    beskrivelse: Array,
-    bilde: Array,
-}) 
 
 const uploads = multer({
-    storage: diskStorage, 
+    storage: diskStorage,
+
 })
+
+
+// const uploads = multer({
+//     storage: diskStorage, 
+// })
 
 
 
@@ -60,13 +56,28 @@ const userSchema = new mongoose.Schema({
     password: String
 })
 
-const User = mongoose.model("User", userSchema);
+const GuideSchema = new Schema({
+    tittel: String,
+    tag: String,
+    tittel: Array,
+    beskrivelse: Array,
+    bilde: Array,
+}) 
 
+const User = mongoose.model("User", userSchema);
+const BrukerGuide = mongoose.model("BrukerGuide", GuideSchema);
 const saltRounds = 10;
 
 app.get("/", (req, res) => {
-    res.render("index")
+    BrukerGuide.find().then((guides)=> {
+        res.render("index", {guides})
+
+    })
 })
+
+
+
+
 
 app.get("/nyguide", (req, res) => {
     res.render("nyguide")
@@ -74,13 +85,14 @@ app.get("/nyguide", (req, res) => {
 
 app.post("/nyguide", uploads.array("bilde"), async (req, res) => {
     console.log(req.body, "BODY");
-    console.log(req.file, "FILE");
+    console.log(req.files, "FILE");
 
     const newBrukerGuide = new BrukerGuide({ 
         tittel: req.body.tittel, 
         tag: req.body.tag,
          overskrift: req.body.overskrift, 
-         beskrivelse: req.body.beskrivelse })
+         beskrivelse: req.body.beskrivelse,
+        bilde: req.files })
     const result = await newBrukerGuide.save();
 })
 
@@ -129,8 +141,7 @@ app.get("/createUser", (req, res) => {
 //     password: String
 // })
 
-const User = mongoose.model("User", userSchema);
-const BrukerGuide = mongoose.model("BrukerGuide", brukerSchema);
+
 
 app.post("/createUser", async (req, res) => {
     console.log("Logger ut her", req.body);
@@ -154,6 +165,18 @@ app.post("/createUser", async (req, res) => {
     }
     
 });
+app.get('/guide/:id', (req, res) => {
+    const guideId = req.params.id;
+    
+    // Finn guiden med matchende _id
+    const guide = guides.find(g => g._id === guideId);
 
+    // Hvis guiden finnes, rendere guide-siden, hvis ikke, returner 404
+    if (guide) {
+        res.render('guide', { guide });
+    } else {
+        res.status(404).send('Guide ikke funnet');
+    }
+});
 
 app.listen(process.env.PORT);

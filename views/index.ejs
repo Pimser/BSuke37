@@ -6,7 +6,14 @@
         </div>
         <main>
             <div class="container">
-                <div class="litenC">
+                <% guides.forEach(function(guide) { %>
+                    <div class="litenC">
+                        <a href="/guide/<%= guide._id %>">
+                            <h1><%= guide.tittel %></h1>
+                        </a>
+                    </div>
+                <% }); %>
+                <!-- <div class="litenC">
                     <h1>guide1</h1>
                 </div>
                 <div class="litenC">
@@ -29,7 +36,7 @@
                 </div>
                 <div class="litenC">
                     <h1>guide8</h1>
-                </div>
+                </div> -->
             </div>
 
         </main>

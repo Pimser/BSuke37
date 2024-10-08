@@ -1,16 +1,18 @@
 <%- include("./partials/header") %>
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= guide.tittel %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
 <body>
     <%- include("./partials/nav") %>
-    <main>
-        <div class="hovedboks">
-            <div class="sidemeny">
-
-            </div>
-            <div class="hoved">
-
-            </div>
-        </div>
-        
-    </main>
+    <div class="guide-detaljer">
+        <h1><%= guide.tittel %></h1>
+        <p><%= guide.beskrivelse %></p>
+        <a href="/">Tilbake til guider</a>
+    </div>
 </body>
 </html>

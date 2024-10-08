@@ -1,20 +1,19 @@
 
 
-.maincontainer{
-    display: grid;
-    display: flex;
-    grid-template-columns: 1fr;
-    min-height: 400px;
-    background-color: salmon;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    padding-left: 500px;
+.guidecontainer{
+    
 }
 
-.formguide{
+.formguide{ 
     display: flex;
     justify-content: center;
     align-content: center;
     text-align: center;
+}
+
+.testcontainer{
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    height: 100%;
+    width: 100%;
 }
