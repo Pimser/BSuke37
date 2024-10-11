@@ -167,16 +167,26 @@ app.post("/createUser", async (req, res) => {
 });
 app.get('/guide/:id', (req, res) => {
     const guideId = req.params.id;
-    
-    // Finn guiden med matchende _id
-    const guide = guides.find(g => g._id === guideId);
 
-    // Hvis guiden finnes, rendere guide-siden, hvis ikke, returner 404
-    if (guide) {
-        res.render('guide', { guide });
-    } else {
-        res.status(404).send('Guide ikke funnet');
-    }
+    console.log("GUIDEID", guideId)
+
+    if(guideId !== "favicon.png") {
+        console.log("this is running")
+        
+        // Finn guiden med matchende _id
+    const guide = BrukerGuide.findById(guideId).then((guide) => {
+        
+        console.log(guide, "GUIDE");
+        // Hvis guiden finnes, rendere guide-siden, hvis ikke, returner 404
+        if (guide) {
+            res.render('guide', { guide });
+        } else {
+            res.status(404).send('Guide ikke funnet');
+        }
+    })
+
+
+}
 });
 
 app.listen(process.env.PORT);

@@ -1,11 +1,11 @@
 body, html{
-    background-color: rgb(209, 187, 158);
+    background-color: rgb(60, 109, 39);
     padding: 0;
     margin: 0;
 }
 
 nav{
-    background-color: grey;
+    background-color: rgb(113, 161, 70);
     height: 20vh;
     margin: 0;
     padding: 0;
