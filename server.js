@@ -12,12 +12,7 @@ const diskStorage = multer.diskStorage({
         cb(null, "./public/uploads")
     },
     filename: function (req, file, cb) {
-        console.log(file);
-        const ext = path.extname(file.originalname);
-        console.log("EXT", ext);
-        // if(ext !== ".png" || ext !== ".jpg") {
-        //     return cb(new Error("Only PNG FILES allowed, stay away Martin!"))
-        // } 
+
         const fileName = file.originalname;
         cb(null, fileName)
     }
@@ -87,6 +82,20 @@ app.post("/nyguide", uploads.array("bilde"), async (req, res) => {
     console.log(req.body, "BODY");
     console.log(req.files, "FILE");
 
+
+    if (req.files && req.files.length > 0) {
+        // Process each file
+        const filePaths = req.files.map(file => {
+          // Replace backslashes with forward slashes
+          return {
+            originalname: file.originalname,
+            path: file.path.replace(/\\/g, '/'), // Convert to forward slashes
+          };
+        });
+    }
+    
+
+
     const newBrukerGuide = new BrukerGuide({ 
         tittel: req.body.tittel, 
         tag: req.body.tag,
@@ -94,6 +103,12 @@ app.post("/nyguide", uploads.array("bilde"), async (req, res) => {
          beskrivelse: req.body.beskrivelse,
         bilde: req.files })
     const result = await newBrukerGuide.save();
+
+            // Return the file paths or use them as needed
+            res.status(200).json({
+                message: 'Brukerguide uploaded successfully!',
+                result: result
+              });
 })
 
 app.get("/login", (req, res) =>{

@@ -4,15 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= guide.tittel %></title>
+    <title>Guider</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <%- include("./partials/nav") %>
-    <div class="guide-detaljer">
-        <h1><%= guide.tittel %></h1>
-        <p><%= guide.beskrivelse %></p>
-        <a href="/">Tilbake til guider</a>
-    </div>
+    <!-- <h1>Guide Details</h1> -->
+
+    <!-- Loop through the arrays together to keep the correct sequence -->
+    <% for (let i = 0; i < guide.tittel.length; i++) { %>
+        <div class="guide-section">
+            <!-- Display the title -->
+            <h2><%= guide.tittel[i] %></h2>
+
+            <!-- Display the corresponding description -->
+            <p><%= guide.beskrivelse[i] %></p>
+
+            <!-- Display the corresponding image -->
+            <% if (guide.bilde[i]) { %>
+                <img src="/<%= guide.bilde[i].path.replace(/\\/g, '/').slice(7) %>" alt="<%= guide.bilde[i].originalname %>" width="300">
+                <p>Image name: <%= guide.bilde[i].originalname %></p>
+                <p>Size: <%= guide.bilde[i].size %> bytes</p>
+            <% } %>
+        </div>
+        <hr>
+    <% } %>
+    <a href="/"><h3>Tilbake til guider</h3></a>
+
 </body>
 </html>
