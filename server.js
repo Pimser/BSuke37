@@ -56,7 +56,6 @@ const GuideSchema = new Schema({
     tag: String,
     tittel: Array,
     overskrift: Array,
-    overskrift: String,
     beskrivelse: Array,
     bilde: Array,
 }) 
