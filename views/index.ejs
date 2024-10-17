@@ -7,11 +7,12 @@
         <main>
             <div class="container">
                 <% guides.forEach(function(guide) { %>
+                    <a href="/guide/<%= guide._id %>" style="color: inherit; text-decoration: none; 
+                    display: flex; align-items: center; justify-content: center; text-align: center;">
                     <div class="litenC">
-                        <a href="/guide/<%= guide._id %>">
                             <h1><%= guide.tittel %></h1>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 <% }); %>
                 <!-- <div class="litenC">
                     <h1>guide1</h1>

@@ -55,6 +55,8 @@ const GuideSchema = new Schema({
     tittel: String,
     tag: String,
     tittel: Array,
+    overskrift: Array,
+    overskrift: String,
     beskrivelse: Array,
     bilde: Array,
 }) 
@@ -65,6 +67,7 @@ const saltRounds = 10;
 
 app.get("/", (req, res) => {
     BrukerGuide.find().then((guides)=> {
+        console.log("guides", guides)
         res.render("index", {guides})
 
     })
@@ -104,11 +107,12 @@ app.post("/nyguide", uploads.array("bilde"), async (req, res) => {
         bilde: req.files })
     const result = await newBrukerGuide.save();
 
+    if(result._id) {
+        res.status(200).redirect(`/guide/${result._id}`)
+
+    }
+
             // Return the file paths or use them as needed
-            res.status(200).json({
-                message: 'Brukerguide uploaded successfully!',
-                result: result
-              });
 })
 
 app.get("/login", (req, res) =>{
@@ -123,7 +127,7 @@ app.post("/login", (req, res) =>{
 
         bcrypt.compare(password, user.password).then((result) => {
             if(result){
-                res.status(200).redirect("/")
+                res.status(200).redirect(`/guide/${result._id}`)
             }
         })
 

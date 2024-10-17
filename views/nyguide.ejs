@@ -1,59 +1,79 @@
 <%- include("./partials/header") %>
 
-<body>
-    <%- include("./partials/nav") %>
-    <main>
-        <div class="testcontainer">
-            <div class="formtester1"></div>
-            <div class="formtester2"></div>
-        </div>
-        <div class="guidecontainer" style="display: flex; flex-direction: column; align-items: center;">
-            <form class="formguide" action="" method="post" enctype="multipart/form-data">
-                <p>Tittel</p>
-                <input type="text" name="tittel">
-                <p>Tags:</p>
-                <input type="text" name="tags">
-                <p><h1>Seksjon:</h1></p>
-                <p>Overskrift:</p>
-                <input type="text" name="overskrift">
-                <p>Beskrivelse:</p>
-                <input type="text" name="beskrivelse">
-                <p>Bilde:</p>
-                <input type="file" name="bilde" src="" alt="" >
-                <p></p>
-                <button>Send inn</button>
-            </form>
-
-            <button onclick="LagNySeksjon()">Lag ny Seksjon</button>
-        </div>
-        <div id="addNewSection">
-
-        </div>
-    </main>
-    <script>
-        function LagNySeksjon() {
-            console.log("seksjon knapp fungerer")
-
-            let NewSection = document.getElementById("addNewSection");
-
-            NewSection.innerHTML += `
-                <div id="addNewSection">
-                    <form class="formguide" action="">
-                <p>Tittel</p>
-                <input type="text" name="tittel">
-                <p>Tags:</p>
-                <input type="text" name="tags">
-                <p><h1>Seksjon:</h1></p>
-                <p>Overskrift:</p>
-                <input type="text" name="overskrift">
-                <p>Beskrivelse:</p>
-                <input type="text" name="beskrivelse">
-                <p>Bilde:</p>
-                <input type="image" src="" alt="" >
-                <p></p>
-            </form>
+    <body>
+        <%- include("./partials/nav") %>
+            <main>
+                <div class="testcontainer">
+                    <div class="formtester1"></div>
+                    <div class="formtester2"></div>
                 </div>
-            `
-        }
-    </script>
-</body>
+                <div class="guidecontainer"
+                    style="display: flex; flex-direction: column; align-items: center; padding-bottom: 100px;">
+                    <form class="formguide" action="" method="post" enctype="multipart/form-data">
+                        <p>Tittel</p>
+                        <input type="text" name="tittel">
+                        <p>Tags:</p>
+                        <input type="text" name="tags">
+                        <p>
+                        <h1>Seksjon:</h1>
+                        </p>
+                        <div id="addNewSection">
+                            <div>
+                                <p>Overskrift:</p>
+                                <input type="text" name="overskrift">
+                                <p>Beskrivelse:</p>
+                                <input type="text" name="beskrivelse">
+                                <p>Bilde:</p>
+                                <input type="file" name="bilde" src="" alt="">
+                                <p></p>
+                            </div>
+                        </div>
+                        <button>Send inn</button>
+
+                    </form>
+
+
+                    <button onclick="LagNySeksjon()">Lag ny Seksjon</button>
+                </div>
+
+            </main>
+            <script>
+                function LagNySeksjon() {
+                    console.log("seksjon knapp fungerer")
+
+                    let NewSection = document.getElementById("addNewSection");
+
+                    NewSection.innerHTML +=
+                        `           
+                         <div>
+                                <p>Overskrift:</p>
+                                <input type="text" name="overskrift">
+                                <p>Beskrivelse:</p>
+                                <input type="text" name="beskrivelse">
+                                <p>Bilde:</p>
+                                <input type="file" name="bilde" src="" alt="">
+                                <p></p>
+                            </div>
+                            `
+                    //`
+                    //     <div id="addNewSection">
+                    //         <form class="formguide" enctype="multipart/form-data" action="" style="display: flex; flex-direction: column; align-items: center;">
+                    //     <p>Tittel</p>
+                    //     <input type="text" name="tittel">
+                    //     <p>Tags:</p>
+                    //     <input type="text" name="tags">
+                    //     <p><h1>Seksjon:</h1></p>
+                    //     <p>Overskrift:</p>
+                    //     <input type="text" name="overskrift">
+                    //     <p>Beskrivelse:</p>
+                    //     <input type="text" name="beskrivelse">
+                    //     <p>Bilde:</p>
+                    //     <input type="file" name="bilde" src="" alt="" >
+                    //     <p></p>
+                    //     <button>Send inn</button>
+                    // </form>
+                    //     </div>
+                    // `
+                }
+            </script>
+    </body>
