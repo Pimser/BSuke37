@@ -33,6 +33,11 @@ jobs:
           echo "Reloading server"
           pm2 reload server --update-env
 
+      - name: Verify pull
+        run: |
+          cd /var/www/helpdesk
+          git log -1 --oneline
+
       - name: Verify PM2 status
         run:
           pm2 status
