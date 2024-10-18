@@ -30,7 +30,7 @@ jobs:
       
       - name: Reload with PM2
         run: | 
-          echo("Reloading server")
+          echo "Reloading server"
           pm2 reload server --update-env
 
       - name: Verify PM2 status
