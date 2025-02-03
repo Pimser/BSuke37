@@ -66,8 +66,15 @@ const saltRounds = 10;
 
 app.get("/", (req, res) => {
     BrukerGuide.find().then((guides)=> {
-        console.log("guides", guides)
-        res.render("index", {guides})
+        if (!guides || guides.length === 0) {
+            console.log("Ingen brukerguides");
+            return res.redirect("/"); 
+        } else {
+            console.log("guides", guides);
+            res.render("index", { guides });
+        }
+
+        
 
     })
 })
