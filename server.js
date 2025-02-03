@@ -65,19 +65,21 @@ const BrukerGuide = mongoose.model("BrukerGuide", GuideSchema);
 const saltRounds = 10;
 
 app.get("/", (req, res) => {
-    BrukerGuide.find().then((guides)=> {
-        if (!guides || guides.length === 0) {
-            console.log("Ingen brukerguides");
-            return res.redirect("/"); 
-        } else {
+    BrukerGuide.find()
+        .then((guides) => {
+            if (!guides || guides.length === 0) {
+                console.log("Ingen brukerguides");
+                return res.render("index", { guides: [] }); 
+            } 
             console.log("guides", guides);
             res.render("index", { guides });
-        }
+        })
+        .catch((err) => {
+            console.error("Feil ved henting av brukerguides:", err);
+            res.status(500).send("En feil oppstod på serveren.");
+        });
+});
 
-        
-
-    })
-})
 
 
 
