@@ -42,7 +42,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-mongoose.connect("mongodb://127.0.0.1:27017/BSuke37")
+mongoose.connect(process.env.mongoDB)
 .then(() => console.log("connected"))
 .catch((error) => console.log("error", error));
 
@@ -117,6 +117,11 @@ app.post("/nyguide", uploads.array("bilde"), async (req, res) => {
 app.get("/login", (req, res) =>{
     res.render("login")
 })
+
+
+app.get("/dashboard", (req, res) =>{
+    res.render("dashboard")
+})
 app.post("/login", (req, res) =>{
     console.log(req.body);
     const {email, password} = req.body;
@@ -126,7 +131,7 @@ app.post("/login", (req, res) =>{
 
         bcrypt.compare(password, user.password).then((result) => {
             if(result){
-                res.status(200).redirect(`/guide/${result._id}`)
+                res.status(200).redirect(`/dashboard`)
             }
         })
 
@@ -135,7 +140,7 @@ app.post("/login", (req, res) =>{
         console.log("Error", error)
     })
 
-    console.log(brukernavn);
+    // console.log(brukernavn);
 })
 
 
@@ -207,4 +212,4 @@ app.get('/guide/:id', (req, res) => {
 }
 });
 
-app.listen(process.env.PORT);
+app.listen(4000);
